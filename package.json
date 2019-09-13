@@ -1,6 +1,6 @@
 {
   "name": "check-versions-of-dep",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Check versions of dependencies in your package.json ",
   "main": "src/index.js",
   "scripts": {
