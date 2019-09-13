@@ -10,7 +10,7 @@
     "checkversion": "./bin/checkversion",
     "cv": "./bin/checkversion"
   },
-  "author": "",
+  "author": "bowencool",
   "license": "MIT",
   "devDependencies": {
     "chalk": "^2.4.2",
