@@ -1,13 +1,13 @@
 {
-  "name": "checkversion",
+  "name": "check-versions-of-dep",
   "version": "1.0.0",
-  "description": "check dependencies version in your package.json ",
+  "description": "Check versions of dependencies in your package.json ",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "checkversion": "./bin/checkversion",
+    "check-versions-of-dep": "./bin/checkversion",
     "cv": "./bin/checkversion"
   },
   "author": "bowencool",
