@@ -8,7 +8,7 @@ In your package.json:
 ``` json
 {
 	"scripts": {
-		"prebuild": "check-versions-of-dep"
+		"prebuild": "check-versions"
 	}
 }
 ```
