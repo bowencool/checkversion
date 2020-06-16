@@ -1,8 +1,8 @@
-# check-versions-of-dep
+# check-versions-in-packagejson
 
 ## usage
 ``` bash
-npm i check-versions-of-dep -D
+npm i check-versions-in-packagejson -D
 ```
 In your package.json:
 ``` json
