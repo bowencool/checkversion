@@ -1,7 +1,14 @@
 {
   "name": "check-versions-in-packagejson",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Check versions of dependencies in your package.json ",
+	"keywords": [
+		"check",
+		"version",
+		"check-version",
+		"package",
+		"package.json"
+	],
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
