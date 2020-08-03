@@ -49,7 +49,6 @@ for (let [package, expect] of deps) {
 
 if (brokenDeps.length > 0) {
 	log(chalk.white.bgRed(' Error ') + ' 依赖版本存在不符项，请重新安装');
-	log(brokenDeps);
 	table(brokenDeps);
 
 	process.exit(1);
