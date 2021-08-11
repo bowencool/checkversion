@@ -1,56 +1,56 @@
 #! /usr/bin/env node
-const { execSync } = require('child_process');
-const semver = require('semver');
-const chalk = require('chalk');
-const fs = require('fs');
+const { execSync } = require("child_process");
+const semver = require("semver");
+const chalk = require("chalk");
+const fs = require("fs");
 const CWD = process.cwd();
-const { dependencies = {}, devDependencies = {}, engines = {} } = require(CWD + '/package.json');
+const { dependencies = {}, devDependencies = {}, engines = {} } = require(CWD +
+  "/package.json");
 
 const { log, table } = console;
 
 const nodeVersion = process.version;
-const npmVersion = execSync('npm --version').toString().trim();
+const npmVersion = execSync("npm --version").toString().trim();
 
 const brokenDeps = [];
 
 if (engines.node && !semver.satisfies(nodeVersion, engines.node)) {
-	brokenDeps.push({
-		package: 'node',
-		expect: engines.node,
-		current: nodeVersion,
-	});
+  brokenDeps.push({
+    package: "node",
+    expect: engines.node,
+    current: nodeVersion,
+  });
 }
 
 if (engines.npm && !semver.satisfies(npmVersion, engines.npm)) {
-	brokenDeps.push({
-		package: 'npm',
-		expect: engines.npm,
-		current: npmVersion,
-	});
+  brokenDeps.push({
+    package: "npm",
+    expect: engines.npm,
+    current: npmVersion,
+  });
 }
 
 const deps = [
-	...Object.entries(dependencies),
-	...Object.entries(devDependencies),
+  ...Object.entries(dependencies),
+  ...Object.entries(devDependencies),
 ];
 
 for (let [package, expect] of deps) {
-	const packageFilePath = `${CWD}/node_modules/${package}/package.json`
-	if (!fs.existsSync(packageFilePath)) {
-		brokenDeps.push({ package, expect, current: 'null' })
-		continue
-	}
-	const { version } = require(packageFilePath);
-	const isSat = semver.satisfies(version, expect);
-	if (!isSat) {
-		brokenDeps.push({ package, expect, current: version });
-	}
+  const packageFilePath = `${CWD}/node_modules/${package}/package.json`;
+  if (!fs.existsSync(packageFilePath)) {
+    brokenDeps.push({ package, expect, current: null });
+    continue;
+  }
+  const { version } = require(packageFilePath);
+  const isSat = semver.satisfies(version, expect);
+  if (!isSat) {
+    brokenDeps.push({ package, expect, current: version });
+  }
 }
 
 if (brokenDeps.length > 0) {
-	log(chalk.white.bgRed(' Error ') + ' 依赖版本存在不符项，请重新安装');
-	table(brokenDeps);
+  log(chalk.white.bgRed(" Error ") + " 依赖版本存在不符项，请重新安装");
+  table(brokenDeps);
 
-	process.exit(1);
+  process.exit(1);
 }
-
