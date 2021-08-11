@@ -1,13 +1,15 @@
 #! /usr/bin/env node
 const { execSync } = require("child_process");
 const semver = require("semver");
+// const semverCompare = require("semver/functions/compare");
 const chalk = require("chalk");
 const fs = require("fs");
 const CWD = process.cwd();
 const { dependencies = {}, devDependencies = {}, engines = {} } = require(CWD +
   "/package.json");
+const { printTable } = require("console-table-printer");
 
-const { log, table } = console;
+const { log } = console;
 
 const nodeVersion = process.version;
 const npmVersion = execSync("npm --version").toString().trim();
@@ -38,19 +40,30 @@ const deps = [
 for (let [package, expect] of deps) {
   const packageFilePath = `${CWD}/node_modules/${package}/package.json`;
   if (!fs.existsSync(packageFilePath)) {
-    brokenDeps.push({ package, expect, current: null });
+    brokenDeps.push({ package, expect, current: chalk.gray("null") });
     continue;
   }
   const { version } = require(packageFilePath);
   const isSat = semver.satisfies(version, expect);
   if (!isSat) {
-    brokenDeps.push({ package, expect, current: version });
+    let text = version;
+    const versionObj = semver.parse(version);
+    const expectObj = semver.minVersion(expect);
+    // console.log(package, expectObj, versionObj);
+    if (versionObj.major !== expectObj.major) {
+      text = chalk.red(version);
+    } else if (versionObj.minor !== expectObj.minor) {
+      text = chalk.yellow(version);
+    } else {
+      text = chalk.green(version);
+    }
+    brokenDeps.push({ package, expect, current: text });
   }
 }
 
 if (brokenDeps.length > 0) {
-  log(chalk.white.bgRed(" Error ") + " 依赖版本存在不符项，请重新安装");
-  table(brokenDeps);
+  log(chalk.white.bgRed(" Error "), chalk.red("依赖版本存在不符项，请重新安装"));
+  printTable(brokenDeps);
 
   process.exit(1);
 }
