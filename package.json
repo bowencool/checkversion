@@ -19,7 +19,7 @@
   },
   "author": "bowencool",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "chalk": "^2.4.2",
     "console-table-printer": "^2.10.0",
     "semver": "^6.3.0"
