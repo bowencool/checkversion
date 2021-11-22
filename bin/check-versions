@@ -61,7 +61,7 @@ for (let [package, expect] of deps) {
       brokenDeps.push({ package, expect, current: text });
     }
   } catch (error) {
-    console.log(package, expect, version, chalk.red(error.message));
+    console.log(package, chalk.red(error.message));
   }
 }
 
