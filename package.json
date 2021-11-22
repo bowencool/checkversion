@@ -1,6 +1,6 @@
 {
   "name": "check-versions-in-packagejson",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Check versions of dependencies in your package.json ",
   "keywords": [
     "check",
