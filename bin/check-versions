@@ -44,25 +44,32 @@ for (let [package, expect] of deps) {
     continue;
   }
   const { version } = require(packageFilePath);
-  const isSat = semver.satisfies(version, expect);
-  if (!isSat) {
-    let text = version;
-    const versionObj = semver.parse(version);
-    const expectObj = semver.minVersion(expect);
-    // console.log(package, expectObj, versionObj);
-    if (versionObj.major !== expectObj.major) {
-      text = chalk.red(version);
-    } else if (versionObj.minor !== expectObj.minor) {
-      text = chalk.yellow(version);
-    } else {
-      text = chalk.green(version);
+  try {
+    const isSat = semver.satisfies(version, expect);
+    if (!isSat) {
+      let text = version;
+      const versionObj = semver.parse(version);
+      const expectObj = semver.minVersion(expect);
+      // console.log(package, expectObj, versionObj);
+      if (versionObj.major !== expectObj.major) {
+        text = chalk.red(version);
+      } else if (versionObj.minor !== expectObj.minor) {
+        text = chalk.yellow(version);
+      } else {
+        text = chalk.green(version);
+      }
+      brokenDeps.push({ package, expect, current: text });
     }
-    brokenDeps.push({ package, expect, current: text });
+  } catch (error) {
+    console.log(package, expect, version, chalk.red(error.message));
   }
 }
 
 if (brokenDeps.length > 0) {
-  log(chalk.white.bgRed(" Error "), chalk.red("依赖版本存在不符项，请重新安装"));
+  log(
+    chalk.white.bgRed(" Error "),
+    chalk.red("依赖版本存在不符项，请重新安装")
+  );
   printTable(brokenDeps);
 
   process.exit(1);

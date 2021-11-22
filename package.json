@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
+    "check-versions-in-packagejson": "^1.2.2",
     "console-table-printer": "^2.10.0",
     "semver": "^6.3.0"
   }
