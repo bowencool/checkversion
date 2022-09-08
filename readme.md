@@ -8,7 +8,10 @@ In your package.json:
 ``` json
 {
 	"scripts": {
-		"prebuild": "check-versions"
+		"prebuild": "check-versions",
+		"prestart": "check-versions"
 	}
 }
 ```
+
+![screenshot](./screenshot.png)
