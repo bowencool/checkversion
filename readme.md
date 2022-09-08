@@ -1,8 +1,8 @@
-# check-versions-in-packagejson
+# @bowencool/check-versions
 
 ## usage
 ``` bash
-npm i check-versions-in-packagejson -D
+npm i @bowencool/check-versions -D
 ```
 In your package.json:
 ``` json

@@ -1,5 +1,5 @@
 {
-  "name": "check-versions-in-packagejson",
+  "name": "@bowencool/check-versions",
   "version": "1.2.5",
   "description": "Check versions of dependencies in your package.json ",
   "keywords": [
@@ -13,6 +13,7 @@
   "scripts": {
     "postpublish": "git push && git push --tags"
   },
+  "homepage": "https://github.com/bowencool/checkversion",
   "bin": {
     "check-versions": "./bin/check-versions",
     "checkversions": "./bin/check-versions"
