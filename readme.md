@@ -14,4 +14,4 @@ In your package.json:
 }
 ```
 
-![screenshot](./screenshot.png)
+![screenshot](https://raw.githubusercontent.com/bowencool/checkversion/master/screenshot.png)
